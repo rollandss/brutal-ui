@@ -3,22 +3,26 @@
 ## Development
 
 1. Clone the repository:
+
 ```bash
 git clone https://github.com/yourusername/brutal-ui.git
 cd brutal-ui
 ```
 
 2. Install dependencies:
+
 ```bash
 npm install
 ```
 
 3. Start development mode:
+
 ```bash
 npm run dev
 ```
 
 4. Build the library:
+
 ```bash
 npm run build
 ```
@@ -48,26 +52,28 @@ brutal-ui/
 import React from 'react';
 import { cn } from '../utils/cn';
 
-export interface YourComponentProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface YourComponentProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   variant?: 'default' | 'other';
 }
 
-export const YourComponent = React.forwardRef<HTMLDivElement, YourComponentProps>(
-  ({ className, variant = 'default', ...props }, ref) => {
-    return (
-      <div
-        ref={ref}
-        className={cn(
-          'border-4 border-black',
-          'font-bold uppercase',
-          variant === 'default' && 'bg-white',
-          className
-        )}
-        {...props}
-      />
-    );
-  }
-);
+export const YourComponent = React.forwardRef<
+  HTMLDivElement,
+  YourComponentProps
+>(({ className, variant = 'default', ...props }, ref) => {
+  return (
+    <div
+      ref={ref}
+      className={cn(
+        'border-4 border-black',
+        'font-bold uppercase',
+        variant === 'default' && 'bg-white',
+        className
+      )}
+      {...props}
+    />
+  );
+});
 
 YourComponent.displayName = 'YourComponent';
 ```
@@ -82,6 +88,7 @@ export type { YourComponentProps } from './components/your-component';
 3. Update README.md with usage examples
 
 4. Build and test:
+
 ```bash
 npm run build
 npm run type-check

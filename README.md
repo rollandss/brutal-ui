@@ -2,6 +2,10 @@
 
 A **brutal/neobrutalist** UI component library for React with TypeScript support.
 
+![Brutal UI Banner](https://via.placeholder.com/1200x300/000000/FFFFFF?text=BRUTAL+UI)
+
+> **Bold. Raw. Unapologetic.** A design system that breaks the rules.
+
 ## Features
 
 - 🎯 **Brutal Design** - Thick borders, bold shadows, raw aesthetics
