@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { cn } from '../utils/cn';
 
@@ -42,7 +44,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       'font-bold uppercase tracking-wide',
       'border-4 border-black',
       'transition-all duration-200',
-      'focus:outline-none focus:ring-4 focus:ring-offset-4',
+      'focus:outline-none',
       'disabled:opacity-50 disabled:cursor-not-allowed',
       'active:translate-y-1',
 

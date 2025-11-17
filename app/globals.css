@@ -1,0 +1,18 @@
+/* Import Brutal UI styles */
+@import '../dist/styles.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background: linear-gradient(
+    135deg,
+    #fbbf24 0%,
+    #f59e0b 25%,
+    #ef4444 50%,
+    #ec4899 75%,
+    #a855f7 100%
+  );
+  min-height: 100vh;
+}

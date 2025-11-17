@@ -6,6 +6,10 @@ A **brutal/neobrutalist** UI component library for React with TypeScript support
 
 > **Bold. Raw. Unapologetic.** A design system that breaks the rules.
 
+## 🌐 Live Demo
+
+**[View Documentation & Examples](https://rollandss.github.io/brutal-ui/)**
+
 ## Features
 
 - 🎯 **Brutal Design** - Thick borders, bold shadows, raw aesthetics
@@ -14,6 +18,7 @@ A **brutal/neobrutalist** UI component library for React with TypeScript support
 - ♿ **Accessible** - ARIA attributes and semantic HTML
 - 🚀 **Tree-shakable** - Only import what you need
 - 🎭 **Customizable** - Override styles with className
+- 📚 **39 Components** - Complete UI toolkit
 
 ## Installation
 
@@ -150,21 +155,55 @@ function App() {
 }
 ```
 
-## Roadmap
+## Available Components
 
-- [ ] Select
-- [ ] Checkbox
-- [ ] Radio
-- [ ] Switch
-- [ ] Tabs
-- [ ] Modal
-- [ ] Toast
-- [ ] Tooltip
-- [ ] Dropdown
-- [ ] Progress
-- [ ] Skeleton
-- [ ] Table
-- [ ] Pagination
+✅ **39 Components Ready:**
+
+- Button, Input, Card, Badge, Alert
+- Modal, Drawer, Toast, Tooltip, Popover
+- Switch, Checkbox, Radio, Select, Slider
+- Tabs, Accordion, Dropdown, Table
+- Progress, Spinner, Loader, Skeleton
+- Avatar, AvatarGroup, Chip, Divider
+- Breadcrumb, Pagination, Timeline
+- Rating, FileUpload, Textarea
+- Separator, Confetti
+
+[View all components in docs →](https://rollandss.github.io/brutal-ui/docs)
+
+## 🚀 Deploy to GitHub Pages
+
+This project includes automatic deployment to GitHub Pages via GitHub Actions.
+
+### Setup Instructions:
+
+1. **Push to GitHub:**
+
+   ```bash
+   git init
+   git add .
+   git commit -m "Initial commit"
+   git branch -M main
+   git remote add origin https://github.com/rollandss/brutal-ui.git
+   git push -u origin main
+   ```
+
+2. **Enable GitHub Pages:**
+
+   - Go to your repository settings
+   - Navigate to **Pages** section
+   - Source: **GitHub Actions**
+   - The site will auto-deploy on every push to `main`
+
+3. **Update Repository URL:**
+
+   - Repository URL already set to `rollandss/brutal-ui`
+   - Update `basePath` in `next.config.mjs` if your repo name differs
+
+4. **Access Your Site:**
+   - `https://rollandss.github.io/brutal-ui/`
+
+The workflow builds the library and Next.js site automatically!
 
 ## License
 

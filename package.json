@@ -18,11 +18,17 @@
     "src"
   ],
   "scripts": {
-    "dev": "tsup --watch",
-    "build": "tsup",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "build:lib": "npm run build:css",
+    "dev:lib": "tsup --watch",
+    "dev:css": "tailwindcss -i ./src/styles.css -o ./dist/styles.css --watch",
+    "build:css": "tailwindcss -i ./src/styles.css -o ./dist/styles.css --minify",
+    "preview": "npx serve -l 5173 examples",
     "lint": "eslint src --ext .ts,.tsx",
     "type-check": "tsc --noEmit",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build:lib"
   },
   "keywords": [
     "brutal",
@@ -37,7 +43,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/brutal-ui.git"
+    "url": "https://github.com/rollandss/brutal-ui.git"
   },
   "peerDependencies": {
     "react": "^18.0.0 || ^19.0.0",
@@ -45,21 +51,26 @@
   },
   "dependencies": {
     "clsx": "^2.1.1",
+    "next": "^16.0.3",
     "tailwind-merge": "^2.5.4"
   },
   "devDependencies": {
     "@types/node": "^20.10.6",
-    "@types/react": "^18.2.46",
-    "@types/react-dom": "^18.2.18",
+    "@types/react": "^18.3.26",
+    "@types/react-dom": "^18.3.7",
     "@typescript-eslint/eslint-plugin": "^6.17.0",
     "@typescript-eslint/parser": "^6.17.0",
+    "@vitejs/plugin-react": "^5.1.1",
+    "autoprefixer": "^10.4.16",
     "eslint": "^8.56.0",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "postcss": "^8.4.32",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "tailwindcss": "^3.4.0",
     "tsup": "^8.0.1",
     "typescript": "^5.3.3",
-    "autoprefixer": "^10.4.16",
-    "postcss": "^8.4.32",
-    "tailwindcss": "^3.4.0"
+    "vite": "^7.2.2"
   }
 }
