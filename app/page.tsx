@@ -88,7 +88,7 @@ function HomePageContent() {
               </Button>
             </Link>
             <a
-              href='https://github.com/yourusername/brutal-ui'
+              href='https://github.com/rollandss/brutal-ui'
               target='_blank'
               rel='noopener noreferrer'
             >
@@ -852,7 +852,7 @@ function HomePageContent() {
         {/* Footer */}
         <footer className='text-center mt-12 pt-8 border-t-4 border-black'>
           <p className='text-xl font-bold mb-4'>
-            Made with 💀 by CRM Team · Brutal UI v0.1.0
+            Made with 💀 by rollandss · Brutal UI v0.1.0
           </p>
           <div className='flex justify-center gap-4'>
             <a
