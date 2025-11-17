@@ -1,9 +1,25 @@
-/* Import Brutal UI styles */
-@import '../src/styles.css';
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Brutal UI styles */
+@layer components {
+  .brutal-focus-ring {
+    outline: none;
+    box-shadow: 0 0 0 4px #000, 0 0 0 8px #fff;
+  }
+  .brutal-pressable {
+    transition: transform 120ms ease, box-shadow 120ms ease;
+    box-shadow: 4px 4px 0 0 rgba(0, 0, 0, 1);
+  }
+  .brutal-pressable:hover {
+    box-shadow: 6px 6px 0 0 rgba(0, 0, 0, 1);
+  }
+  .brutal-pressable:active {
+    transform: translateY(1px);
+    box-shadow: 2px 2px 0 0 rgba(0, 0, 0, 1);
+  }
+}
 
 body {
   background: linear-gradient(
