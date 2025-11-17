@@ -5,30 +5,27 @@ import { Badge } from '../../../src/components/badge';
 import { Card, CardContent } from '../../../src/components/card';
 import { CodeBlock } from '../../components/CodeBlock';
 import { ComponentPreview } from '../../components/ComponentPreview';
-import { useToast } from '../../../src/components/toast';
 
 export default function ContextMenuDocs() {
-  const { addToast } = useToast();
-
   const menuItems = [
     {
       label: 'Copy',
       icon: '📋',
       shortcut: 'Ctrl+C',
-      onClick: () => addToast({ title: 'Copied!', type: 'success' }),
+      onClick: () => console.log('Copied!'),
     },
     {
       label: 'Paste',
       icon: '📄',
       shortcut: 'Ctrl+V',
-      onClick: () => addToast({ title: 'Pasted!', type: 'info' }),
+      onClick: () => console.log('Pasted!'),
     },
     { divider: true } as any,
     {
       label: 'Delete',
       icon: '🗑️',
       shortcut: 'Del',
-      onClick: () => addToast({ title: 'Deleted!', type: 'error' }),
+      onClick: () => console.log('Deleted!'),
     },
   ];
 

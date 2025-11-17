@@ -6,27 +6,24 @@ import { Badge } from '../../../src/components/badge';
 import { Button } from '../../../src/components/button';
 import { CodeBlock } from '../../components/CodeBlock';
 import { ComponentPreview } from '../../components/ComponentPreview';
-import { useToast } from '../../../src/components/toast';
 
 export default function DropdownDocs() {
-  const { addToast } = useToast();
-
   const items = [
     {
       label: 'Profile',
       icon: '👤',
-      onClick: () => addToast({ title: 'Profile opened', type: 'info' }),
+      onClick: () => console.log('Profile opened'),
     },
     {
       label: 'Settings',
       icon: '⚙️',
-      onClick: () => addToast({ title: 'Settings opened', type: 'info' }),
+      onClick: () => console.log('Settings opened'),
     },
     { divider: true } as any,
     {
       label: 'Logout',
       icon: '🚪',
-      onClick: () => addToast({ title: 'Logged out', type: 'error' }),
+      onClick: () => console.log('Logged out'),
     },
   ];
 
