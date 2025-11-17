@@ -3,7 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   transpilePackages: ['@brutal-ui/react'],
   output: 'export',
-  basePath: process.env.NODE_ENV === 'production' ? '/brutal-ui' : '',
+  basePath: process.env.GITHUB_ACTIONS ? '/brutal-ui' : '',
   images: {
     unoptimized: true,
   },
