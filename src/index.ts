@@ -131,5 +131,36 @@ export type { CollapsibleProps } from './components/collapsible';
 export { Separator } from './components/separator';
 export type { SeparatorProps } from './components/separator';
 
+export { Sticker, StickerGroup } from './components/sticker';
+export type { StickerProps, StickerGroupProps } from './components/sticker';
+
+export { AnimatedIcon, IconGrid } from './components/animated-icon';
+export type {
+  AnimatedIconProps,
+  IconGridProps,
+} from './components/animated-icon';
+
+export { Toggle, ToggleGroup } from './components/toggle';
+export type { ToggleProps, ToggleGroupProps } from './components/toggle';
+
+export { Shaker, Bouncer, SpinnerBox, Pulser } from './components/motion';
+export type {
+  ShakerProps,
+  BouncerProps,
+  SpinnerBoxProps,
+  PulserProps,
+} from './components/motion';
+
+export {
+  FlipCard,
+  RevealCard,
+  MorphCard,
+} from './components/interactive-cards';
+export type {
+  FlipCardProps,
+  RevealCardProps,
+  MorphCardProps,
+} from './components/interactive-cards';
+
 // Utilities
 export { cn } from './utils/cn';

@@ -44,6 +44,15 @@ import { Popover } from '../src/components/popover';
 import { Spinner, Loader } from '../src/components/spinner';
 import { Rating } from '../src/components/rating';
 import { FileUpload } from '../src/components/file-upload';
+import { Sticker, StickerGroup } from '../src/components/sticker';
+import { AnimatedIcon, IconGrid } from '../src/components/animated-icon';
+import { Toggle, ToggleGroup } from '../src/components/toggle';
+import { Shaker, Bouncer, SpinnerBox, Pulser } from '../src/components/motion';
+import {
+  FlipCard,
+  RevealCard,
+  MorphCard,
+} from '../src/components/interactive-cards';
 
 function HomePageContent() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -64,44 +73,698 @@ function HomePageContent() {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [rating, setRating] = useState(3);
   const [files, setFiles] = useState<File[]>([]);
+  const [animationDemo, setAnimationDemo] = useState<string>('');
+  const [toggles, setToggles] = useState({
+    toggle1: false,
+    toggle2: true,
+    toggle3: false,
+    toggle4: true,
+  });
+
+  const triggerAnimation = (anim: string) => {
+    setAnimationDemo(anim);
+    setTimeout(() => setAnimationDemo(''), 1000);
+  };
 
   return (
     <div className='p-8'>
       {showConfetti && <Confetti active={showConfetti} duration={3000} />}
 
-      <div className='max-w-6xl mx-auto space-y-8'>
+      <div className='max-w-7xl mx-auto space-y-8 lg:space-y-12'>
         {/* Header */}
-        <div className='text-center mb-12'>
+        <div className='text-center mb-12 px-4'>
           <h1
-            className='text-8xl font-black uppercase mb-4 animate-bounce-once'
-            style={{ textShadow: '6px 6px 0px rgba(0, 0, 0, 1)' }}
+            className='text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black uppercase mb-4 animate-bounce-once'
+            style={{ textShadow: '4px 4px 0px rgba(0, 0, 0, 1)' }}
           >
             🎨 Brutal UI
           </h1>
-          <p className='text-2xl font-bold text-black bg-white border-4 border-black inline-block px-8 py-4 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] animate-slide-up mb-6'>
-            Next.js 16 + App Router + 20+ Components
+          <p className='text-base sm:text-xl md:text-2xl font-bold text-black bg-white border-3 sm:border-4 border-black inline-block px-4 sm:px-6 md:px-8 py-3 md:py-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] sm:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] md:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] animate-slide-up mb-6'>
+            Next.js 16 + App Router + 50+ Components
           </p>
-          <div className='flex justify-center gap-4 mt-6'>
-            <Link href='/docs'>
-              <Button variant='primary' size='lg'>
+          <div className='flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 mt-6 max-w-md mx-auto sm:max-w-none'>
+            <Link href='/docs' className='w-full sm:w-auto'>
+              <Button variant='primary' size='lg' className='w-full sm:w-auto'>
                 📖 Documentation
               </Button>
             </Link>
             <a
-              href='https://github.com/yourusername/brutal-ui'
+              href='https://github.com/rollandss/brutal-ui'
               target='_blank'
               rel='noopener noreferrer'
+              className='w-full sm:w-auto'
             >
-              <Button variant='secondary' size='lg'>
+              <Button
+                variant='secondary'
+                size='lg'
+                className='w-full sm:w-auto'
+              >
                 💻 GitHub
               </Button>
             </a>
           </div>
         </div>
 
+        {/* Stats/Metrics Cards */}
+        <section className='space-y-4 sm:space-y-6'>
+          <h2 className='text-2xl sm:text-3xl font-bold uppercase mb-4 sm:mb-6 border-b-3 sm:border-b-4 border-black pb-3 sm:pb-4 bg-white p-4 sm:p-6'>
+            📊 Statistics
+          </h2>
+          <div className='grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4'>
+            <Card className='bg-gradient-to-br from-purple-400 to-purple-600 border-4 border-black text-white hover:translate-y-[-4px] transition-transform duration-200'>
+              <CardContent className='p-4 sm:p-6'>
+                <div className='text-3xl sm:text-4xl font-black mb-2'>39+</div>
+                <div className='text-base sm:text-lg font-bold uppercase'>
+                  Components
+                </div>
+                <div className='text-xs sm:text-sm opacity-90 mt-1'>
+                  Ready to use
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className='bg-gradient-to-br from-blue-400 to-blue-600 border-4 border-black text-white hover:translate-y-[-4px] transition-transform duration-200'>
+              <CardContent className='p-4 sm:p-6'>
+                <div className='text-3xl sm:text-4xl font-black mb-2'>100%</div>
+                <div className='text-base sm:text-lg font-bold uppercase'>
+                  TypeScript
+                </div>
+                <div className='text-xs sm:text-sm opacity-90 mt-1'>
+                  Fully typed
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className='bg-gradient-to-br from-green-400 to-green-600 border-4 border-black text-white hover:translate-y-[-4px] transition-transform duration-200'>
+              <CardContent className='p-4 sm:p-6'>
+                <div className='text-3xl sm:text-4xl font-black mb-2'>⚡</div>
+                <div className='text-base sm:text-lg font-bold uppercase'>
+                  Fast
+                </div>
+                <div className='text-xs sm:text-sm opacity-90 mt-1'>
+                  Optimized builds
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className='bg-gradient-to-br from-orange-400 to-orange-600 border-4 border-black text-white hover:translate-y-[-4px] transition-transform duration-200'>
+              <CardContent className='p-4 sm:p-6'>
+                <div className='text-3xl sm:text-4xl font-black mb-2'>🎨</div>
+                <div className='text-base sm:text-lg font-bold uppercase'>
+                  Brutal
+                </div>
+                <div className='text-xs sm:text-sm opacity-90 mt-1'>
+                  Bold design
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </section>
+
+        {/* Brutal Stickers Section */}
+        <section className='bg-gradient-to-br from-pink-200 via-yellow-200 to-blue-200 border-3 sm:border-4 border-black p-6 sm:p-8 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] sm:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]'>
+          <h2 className='text-2xl sm:text-3xl font-bold uppercase mb-6 text-center animate-wiggle'>
+            🎉 Brutal Stickers
+          </h2>
+          <StickerGroup className='mb-8'>
+            <Sticker
+              emoji='💀'
+              text='BRUTAL'
+              color='yellow'
+              variant='rotate-left'
+              size='lg'
+              onClick={() => addToast({ title: '💀 Brutal!', type: 'success' })}
+            />
+            <Sticker
+              emoji='🔥'
+              text='HOT'
+              color='orange'
+              variant='float'
+              size='md'
+              onClick={() =>
+                addToast({ title: '🔥 On Fire!', type: 'warning' })
+              }
+            />
+            <Sticker
+              emoji='⭐'
+              text='STAR'
+              color='blue'
+              variant='pulse'
+              size='md'
+              onClick={() => addToast({ title: '⭐ Amazing!', type: 'info' })}
+            />
+            <Sticker
+              emoji='💎'
+              text='GEM'
+              color='purple'
+              variant='rotate-right'
+              size='lg'
+              onClick={() =>
+                addToast({ title: '💎 Precious!', type: 'success' })
+              }
+            />
+            <Sticker
+              emoji='🎨'
+              text='ART'
+              color='pink'
+              variant='wiggle'
+              size='md'
+              onClick={() => addToast({ title: '🎨 Creative!', type: 'info' })}
+            />
+            <Sticker
+              emoji='⚡'
+              text='FAST'
+              color='yellow'
+              variant='bounce'
+              size='md'
+              onClick={() =>
+                addToast({ title: '⚡ Lightning!', type: 'warning' })
+              }
+            />
+            <Sticker
+              emoji='🚀'
+              text='LAUNCH'
+              color='blue'
+              variant='rotate-left'
+              size='lg'
+              onClick={() => {
+                setShowConfetti(true);
+                addToast({ title: '🚀 Launched!', type: 'success' });
+                setTimeout(() => setShowConfetti(false), 3000);
+              }}
+            />
+            <Sticker
+              emoji='💯'
+              text='PERFECT'
+              color='green'
+              variant='pulse'
+              size='md'
+              onClick={() =>
+                addToast({ title: '💯 Perfect!', type: 'success' })
+              }
+            />
+            <Sticker
+              emoji='🎯'
+              text='TARGET'
+              color='red'
+              variant='float'
+              size='md'
+              onClick={() => addToast({ title: '🎯 On Point!', type: 'info' })}
+            />
+            <Sticker
+              emoji='✨'
+              text='MAGIC'
+              color='purple'
+              variant='rotate-right'
+              size='lg'
+              onClick={() => addToast({ title: '✨ Magical!', type: 'info' })}
+            />
+          </StickerGroup>
+          <p className='text-center text-sm font-bold opacity-80'>
+            Click на стікери щоб побачити тости! 👆
+          </p>
+        </section>
+
+        {/* Animation Showcase */}
+        <section className='bg-white border-3 sm:border-4 border-black p-4 sm:p-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] sm:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]'>
+          <h2 className='text-2xl sm:text-3xl font-bold uppercase mb-4 sm:mb-6 border-b-3 sm:border-b-4 border-black pb-3 sm:pb-4'>
+            🎬 Animation Showcase
+          </h2>
+          <div className='grid gap-4 sm:gap-6 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4'>
+            <Button
+              variant='primary'
+              onClick={() => triggerAnimation('animate-rubber-band')}
+              className='h-24'
+            >
+              Rubber Band
+            </Button>
+            <Button
+              variant='secondary'
+              onClick={() => triggerAnimation('animate-jello')}
+              className='h-24'
+            >
+              Jello
+            </Button>
+            <Button
+              variant='success'
+              onClick={() => triggerAnimation('animate-swing')}
+              className='h-24'
+            >
+              Swing
+            </Button>
+            <Button
+              variant='danger'
+              onClick={() => triggerAnimation('animate-flip')}
+              className='h-24'
+            >
+              Flip
+            </Button>
+            <Button
+              variant='danger'
+              onClick={() => triggerAnimation('animate-tada')}
+              className='h-24'
+            >
+              Tada
+            </Button>
+            <Button
+              variant='secondary'
+              onClick={() => triggerAnimation('animate-zoom-in')}
+              className='h-24'
+            >
+              Zoom In
+            </Button>
+            <Button
+              variant='primary'
+              onClick={() => triggerAnimation('animate-bounce-in')}
+              className='h-24'
+            >
+              Bounce In
+            </Button>
+            <Button
+              variant='secondary'
+              onClick={() => triggerAnimation('animate-roll-in')}
+              className='h-24'
+            >
+              Roll In
+            </Button>
+          </div>
+
+          {animationDemo && (
+            <div className='mt-8 flex justify-center'>
+              <Card
+                className={`bg-gradient-to-br from-purple-400 to-pink-400 border-4 border-black text-white ${animationDemo}`}
+              >
+                <CardContent className='p-8 text-center'>
+                  <div className='text-6xl mb-4'>🎪</div>
+                  <div className='text-2xl font-black uppercase'>
+                    Animation Demo!
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          )}
+        </section>
+
+        {/* Hover Effects Showcase */}
+        <section className='bg-white border-3 sm:border-4 border-black p-4 sm:p-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] sm:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]'>
+          <h2 className='text-2xl sm:text-3xl font-bold uppercase mb-4 sm:mb-6 border-b-3 sm:border-b-4 border-black pb-3 sm:pb-4'>
+            🖱️ Hover Effects
+          </h2>
+          <div className='grid gap-4 sm:gap-6 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4'>
+            <Card className='hover-lift cursor-pointer bg-gradient-to-br from-blue-300 to-blue-500 border-4 border-black'>
+              <CardContent className='p-4 text-center'>
+                <div className='text-3xl mb-2'>⬆️</div>
+                <div className='font-bold text-sm'>Hover Lift</div>
+              </CardContent>
+            </Card>
+
+            <Card className='hover-grow cursor-pointer bg-gradient-to-br from-green-300 to-green-500 border-4 border-black'>
+              <CardContent className='p-4 text-center'>
+                <div className='text-3xl mb-2'>🔍</div>
+                <div className='font-bold text-sm'>Hover Grow</div>
+              </CardContent>
+            </Card>
+
+            <Card className='hover-rotate cursor-pointer bg-gradient-to-br from-yellow-300 to-yellow-500 border-4 border-black'>
+              <CardContent className='p-4 text-center'>
+                <div className='text-3xl mb-2'>🔄</div>
+                <div className='font-bold text-sm'>Hover Rotate</div>
+              </CardContent>
+            </Card>
+
+            <Card className='hover-tilt cursor-pointer bg-gradient-to-br from-pink-300 to-pink-500 border-4 border-black'>
+              <CardContent className='p-4 text-center'>
+                <div className='text-3xl mb-2'>📐</div>
+                <div className='font-bold text-sm'>Hover Tilt</div>
+              </CardContent>
+            </Card>
+
+            <Card className='hover-shake cursor-pointer bg-gradient-to-br from-red-300 to-red-500 border-4 border-black'>
+              <CardContent className='p-4 text-center'>
+                <div className='text-3xl mb-2'>🌪️</div>
+                <div className='font-bold text-sm'>Hover Shake</div>
+              </CardContent>
+            </Card>
+
+            <Card className='hover-jello cursor-pointer bg-gradient-to-br from-purple-300 to-purple-500 border-4 border-black'>
+              <CardContent className='p-4 text-center'>
+                <div className='text-3xl mb-2'>🍮</div>
+                <div className='font-bold text-sm'>Hover Jello</div>
+              </CardContent>
+            </Card>
+
+            <Card className='hover-rubber-band cursor-pointer bg-gradient-to-br from-orange-300 to-orange-500 border-4 border-black'>
+              <CardContent className='p-4 text-center'>
+                <div className='text-3xl mb-2'>🎸</div>
+                <div className='font-bold text-sm'>Hover Rubber</div>
+              </CardContent>
+            </Card>
+
+            <Card className='hover-swing cursor-pointer bg-gradient-to-br from-teal-300 to-teal-500 border-4 border-black'>
+              <CardContent className='p-4 text-center'>
+                <div className='text-3xl mb-2'>🎭</div>
+                <div className='font-bold text-sm'>Hover Swing</div>
+              </CardContent>
+            </Card>
+          </div>
+        </section>
+
+        {/* Toggle Switches Section */}
+        <section className='bg-white border-3 sm:border-4 border-black p-4 sm:p-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] sm:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]'>
+          <h2 className='text-2xl sm:text-3xl font-bold uppercase mb-4 sm:mb-6 border-b-3 sm:border-b-4 border-black pb-3 sm:pb-4'>
+            🎚️ Toggle Switches
+          </h2>
+          <div className='space-y-6'>
+            <div>
+              <h3 className='text-lg font-bold mb-3'>Варіанти стилів</h3>
+              <ToggleGroup>
+                <Toggle
+                  checked={toggles.toggle1}
+                  onChange={(checked) =>
+                    setToggles({ ...toggles, toggle1: checked })
+                  }
+                  variant='default'
+                  label='Default'
+                />
+                <Toggle
+                  checked={toggles.toggle2}
+                  onChange={(checked) =>
+                    setToggles({ ...toggles, toggle2: checked })
+                  }
+                  variant='brutal'
+                  label='Brutal'
+                />
+                <Toggle
+                  checked={toggles.toggle3}
+                  onChange={(checked) =>
+                    setToggles({ ...toggles, toggle3: checked })
+                  }
+                  variant='neon'
+                  label='Neon'
+                />
+                <Toggle
+                  checked={toggles.toggle4}
+                  onChange={(checked) =>
+                    setToggles({ ...toggles, toggle4: checked })
+                  }
+                  variant='gradient'
+                  label='Gradient'
+                />
+              </ToggleGroup>
+            </div>
+
+            <div>
+              <h3 className='text-lg font-bold mb-3'>Розміри</h3>
+              <ToggleGroup>
+                <Toggle checked size='sm' label='Small' />
+                <Toggle checked size='md' label='Medium' />
+                <Toggle checked size='lg' label='Large' />
+              </ToggleGroup>
+            </div>
+
+            <div>
+              <h3 className='text-lg font-bold mb-3'>З іконками</h3>
+              <ToggleGroup>
+                <Toggle
+                  checked
+                  variant='brutal'
+                  icon={{ on: '✓', off: '✗' }}
+                  label='Check'
+                />
+                <Toggle
+                  checked={false}
+                  variant='neon'
+                  icon={{ on: '🌙', off: '☀️' }}
+                  label='Theme'
+                />
+                <Toggle
+                  checked
+                  variant='gradient'
+                  icon={{ on: '🔊', off: '🔇' }}
+                  label='Sound'
+                />
+              </ToggleGroup>
+            </div>
+          </div>
+        </section>
+
+        {/* Motion Effects Section */}
+        <section className='bg-gradient-to-br from-blue-200 via-purple-200 to-pink-200 border-3 sm:border-4 border-black p-4 sm:p-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] sm:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]'>
+          <h2 className='text-2xl sm:text-3xl font-bold uppercase mb-6 text-center'>
+            🎭 Motion Effects
+          </h2>
+          <div className='grid gap-6 grid-cols-2 md:grid-cols-4'>
+            <div className='text-center'>
+              <Shaker trigger='hover' intensity='medium'>
+                <Card className='bg-yellow-300 border-4 border-black'>
+                  <CardContent className='p-6'>
+                    <div className='text-4xl mb-2'>🌪️</div>
+                    <div className='font-bold text-sm'>Shaker</div>
+                    <div className='text-xs mt-1'>Hover me!</div>
+                  </CardContent>
+                </Card>
+              </Shaker>
+            </div>
+
+            <div className='text-center'>
+              <Bouncer trigger='hover' height='medium'>
+                <Card className='bg-pink-300 border-4 border-black'>
+                  <CardContent className='p-6'>
+                    <div className='text-4xl mb-2'>⬆️</div>
+                    <div className='font-bold text-sm'>Bouncer</div>
+                    <div className='text-xs mt-1'>Hover me!</div>
+                  </CardContent>
+                </Card>
+              </Bouncer>
+            </div>
+
+            <div className='text-center'>
+              <SpinnerBox trigger='hover' speed='normal'>
+                <Card className='bg-blue-300 border-4 border-black'>
+                  <CardContent className='p-6'>
+                    <div className='text-4xl mb-2'>🔄</div>
+                    <div className='font-bold text-sm'>Spinner</div>
+                    <div className='text-xs mt-1'>Hover me!</div>
+                  </CardContent>
+                </Card>
+              </SpinnerBox>
+            </div>
+
+            <div className='text-center'>
+              <Pulser intensity='normal' speed='normal'>
+                <Card className='bg-purple-300 border-4 border-black'>
+                  <CardContent className='p-6'>
+                    <div className='text-4xl mb-2'>💫</div>
+                    <div className='font-bold text-sm'>Pulser</div>
+                    <div className='text-xs mt-1'>Always on!</div>
+                  </CardContent>
+                </Card>
+              </Pulser>
+            </div>
+          </div>
+          <p className='text-center text-sm font-bold opacity-80 mt-6'>
+            Наведи курсор щоб побачити ефекти! 🎯
+          </p>
+        </section>
+
+        {/* Interactive Cards Section */}
+        <section className='bg-white border-3 sm:border-4 border-black p-4 sm:p-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] sm:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]'>
+          <h2 className='text-2xl sm:text-3xl font-bold uppercase mb-4 sm:mb-6 border-b-3 sm:border-b-4 border-black pb-3 sm:pb-4'>
+            🎴 Interactive Cards
+          </h2>
+          <div className='grid gap-6 grid-cols-1 md:grid-cols-3'>
+            <div>
+              <h3 className='text-lg font-bold mb-3 text-center'>Flip Card</h3>
+              <FlipCard
+                trigger='hover'
+                direction='horizontal'
+                className='h-64'
+                front={
+                  <div className='flex flex-col items-center justify-center h-full p-6'>
+                    <div className='text-6xl mb-4'>🎴</div>
+                    <div className='text-xl font-black uppercase'>
+                      Front Side
+                    </div>
+                    <div className='text-sm mt-2'>Hover to flip!</div>
+                  </div>
+                }
+                back={
+                  <div className='flex flex-col items-center justify-center h-full p-6 bg-gradient-to-br from-purple-300 to-pink-300'>
+                    <div className='text-6xl mb-4'>✨</div>
+                    <div className='text-xl font-black uppercase'>
+                      Back Side
+                    </div>
+                    <div className='text-sm mt-2'>Amazing!</div>
+                  </div>
+                }
+              />
+            </div>
+
+            <div>
+              <h3 className='text-lg font-bold mb-3 text-center'>
+                Reveal Card
+              </h3>
+              <RevealCard
+                title='Hover Me'
+                trigger='hover'
+                className='h-64'
+                preview={
+                  <div className='text-center'>
+                    <div className='text-4xl mb-2'>🎁</div>
+                    <p className='text-sm'>
+                      Наведи курсор щоб побачити сюрприз...
+                    </p>
+                  </div>
+                }
+                content={
+                  <div className='text-center'>
+                    <div className='text-5xl mb-3'>🎉</div>
+                    <p className='font-bold text-lg'>Сюрприз!</p>
+                    <p className='text-sm mt-2'>
+                      Це прихований контент який з'являється при hover!
+                    </p>
+                  </div>
+                }
+              />
+            </div>
+
+            <div>
+              <h3 className='text-lg font-bold mb-3 text-center'>Morph Card</h3>
+              <MorphCard
+                autoPlay
+                interval={2500}
+                className='h-64'
+                states={[
+                  {
+                    color: '#fef08a',
+                    content: (
+                      <div className='text-center'>
+                        <div className='text-5xl mb-3'>🌞</div>
+                        <div className='font-black text-xl'>State 1</div>
+                        <div className='text-sm mt-2'>Yellow vibes</div>
+                      </div>
+                    ),
+                  },
+                  {
+                    color: '#a5f3fc',
+                    content: (
+                      <div className='text-center'>
+                        <div className='text-5xl mb-3'>🌊</div>
+                        <div className='font-black text-xl'>State 2</div>
+                        <div className='text-sm mt-2'>Cyan waves</div>
+                      </div>
+                    ),
+                  },
+                  {
+                    color: '#fda4af',
+                    content: (
+                      <div className='text-center'>
+                        <div className='text-5xl mb-3'>🌸</div>
+                        <div className='font-black text-xl'>State 3</div>
+                        <div className='text-sm mt-2'>Pink dreams</div>
+                      </div>
+                    ),
+                  },
+                ]}
+              />
+            </div>
+          </div>
+        </section>
+
+        {/* Animated Icons Gallery */}
+        <section className='bg-gradient-to-br from-yellow-200 via-pink-200 to-purple-200 border-3 sm:border-4 border-black p-6 sm:p-8 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] sm:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]'>
+          <h2 className='text-2xl sm:text-3xl font-bold uppercase mb-6 text-center'>
+            🎪 Animated Icons
+          </h2>
+          <IconGrid columns={4} className='mb-8'>
+            <AnimatedIcon icon='🎯' animation='spin' size='lg' />
+            <AnimatedIcon icon='⚡' animation='bounce' size='lg' />
+            <AnimatedIcon icon='💫' animation='pulse' size='lg' />
+            <AnimatedIcon icon='🌟' animation='wiggle' size='lg' />
+            <AnimatedIcon icon='🎨' animation='float' size='lg' />
+            <AnimatedIcon icon='🎭' animation='swing' size='lg' />
+            <AnimatedIcon icon='🔥' animation='shake' size='lg' />
+            <AnimatedIcon icon='💎' animation='flip' size='lg' />
+            <AnimatedIcon icon='🎸' animation='rubber-band' size='lg' />
+            <AnimatedIcon icon='🍮' animation='jello' size='lg' />
+            <AnimatedIcon icon='🎉' animation='tada' size='lg' />
+            <AnimatedIcon icon='⭐' animation='bounce' size='lg' />
+          </IconGrid>
+          <p className='text-center text-sm font-bold opacity-80'>
+            12 різних анімацій для іконок! 🎬
+          </p>
+        </section>
+
+        {/* Feature Highlights with hover effects */}
+        <section className='space-y-4 sm:space-y-6'>
+          <h2 className='text-2xl sm:text-3xl font-bold uppercase mb-4 sm:mb-6 border-b-3 sm:border-b-4 border-black pb-3 sm:pb-4 bg-white p-4 sm:p-6'>
+            ✨ Features
+          </h2>
+          <div className='grid gap-4 sm:gap-6 grid-cols-1 md:grid-cols-2'>
+            <Card className='group hover:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] transition-all duration-300'>
+              <CardContent className='p-4 sm:p-6'>
+                <div className='text-3xl sm:text-4xl mb-3 sm:mb-4 group-hover:scale-110 transition-transform duration-300'>
+                  🚀
+                </div>
+                <h3 className='text-xl sm:text-2xl font-bold mb-2 sm:mb-3'>
+                  Next.js 16
+                </h3>
+                <p className='text-sm sm:text-base'>
+                  Побудовано на останній версії Next.js з App Router та Server
+                  Components
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className='group hover:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] transition-all duration-300'>
+              <CardContent className='p-4 sm:p-6'>
+                <div className='text-3xl sm:text-4xl mb-3 sm:mb-4 group-hover:scale-110 transition-transform duration-300'>
+                  💎
+                </div>
+                <h3 className='text-xl sm:text-2xl font-bold mb-2 sm:mb-3'>
+                  Brutalism First
+                </h3>
+                <p className='text-sm sm:text-base'>
+                  Товсті рамки, яскраві тіні та жирний дизайн для сміливих
+                  проектів
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className='group hover:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] transition-all duration-300'>
+              <CardContent className='p-4 sm:p-6'>
+                <div className='text-3xl sm:text-4xl mb-3 sm:mb-4 group-hover:scale-110 transition-transform duration-300'>
+                  🎯
+                </div>
+                <h3 className='text-xl sm:text-2xl font-bold mb-2 sm:mb-3'>
+                  Accessible
+                </h3>
+                <p className='text-sm sm:text-base'>
+                  Повна підтримка клавіатурної навігації та screen readers
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className='group hover:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] transition-all duration-300'>
+              <CardContent className='p-4 sm:p-6'>
+                <div className='text-3xl sm:text-4xl mb-3 sm:mb-4 group-hover:scale-110 transition-transform duration-300'>
+                  📱
+                </div>
+                <h3 className='text-xl sm:text-2xl font-bold mb-2 sm:mb-3'>
+                  Responsive
+                </h3>
+                <p className='text-sm sm:text-base'>
+                  Адаптивний дизайн для всіх розмірів екранів від мобільних до
+                  десктопу
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+        </section>
+
         {/* Alerts */}
-        <section className='bg-white border-4 border-black p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]'>
-          <h2 className='text-3xl font-bold uppercase mb-6 border-b-4 border-black pb-4'>
+        <section className='bg-white border-3 sm:border-4 border-black p-4 sm:p-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] sm:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]'>
+          <h2 className='text-2xl sm:text-3xl font-bold uppercase mb-4 sm:mb-6 border-b-3 sm:border-b-4 border-black pb-3 sm:pb-4'>
             Alerts
           </h2>
           <div className='space-y-4'>
@@ -121,8 +784,8 @@ function HomePageContent() {
         </section>
 
         {/* Badges & Tags */}
-        <section className='bg-white border-4 border-black p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]'>
-          <h2 className='text-3xl font-bold uppercase mb-6 border-b-4 border-black pb-4'>
+        <section className='bg-white border-3 sm:border-4 border-black p-4 sm:p-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] sm:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]'>
+          <h2 className='text-2xl sm:text-3xl font-bold uppercase mb-4 sm:mb-6 border-b-3 sm:border-b-4 border-black pb-3 sm:pb-4'>
             Badges & Tags
           </h2>
           <div className='flex flex-wrap gap-3'>
@@ -138,8 +801,8 @@ function HomePageContent() {
         </section>
 
         {/* Input Fields */}
-        <section className='bg-white border-4 border-black p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]'>
-          <h2 className='text-3xl font-bold uppercase mb-6 border-b-4 border-black pb-4'>
+        <section className='bg-white border-3 sm:border-4 border-black p-4 sm:p-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] sm:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]'>
+          <h2 className='text-2xl sm:text-3xl font-bold uppercase mb-4 sm:mb-6 border-b-3 sm:border-b-4 border-black pb-3 sm:pb-4'>
             Input Fields
           </h2>
           <div className='space-y-4'>
@@ -167,11 +830,11 @@ function HomePageContent() {
         </section>
 
         {/* Cards */}
-        <section className='space-y-6'>
-          <h2 className='text-3xl font-bold uppercase mb-6 border-b-4 border-black pb-4 bg-white p-6'>
+        <section className='space-y-4 sm:space-y-6'>
+          <h2 className='text-2xl sm:text-3xl font-bold uppercase mb-4 sm:mb-6 border-b-3 sm:border-b-4 border-black pb-3 sm:pb-4 bg-white p-4 sm:p-6'>
             Cards
           </h2>
-          <div className='grid gap-6 md:grid-cols-3'>
+          <div className='grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'>
             <Card variant='default'>
               <CardHeader>
                 <CardTitle>Default Card</CardTitle>
@@ -220,11 +883,11 @@ function HomePageContent() {
         </section>
 
         {/* Tooltips */}
-        <section className='bg-white border-4 border-black p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]'>
-          <h2 className='text-3xl font-bold uppercase mb-6 border-b-4 border-black pb-4'>
+        <section className='bg-white border-3 sm:border-4 border-black p-4 sm:p-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] sm:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]'>
+          <h2 className='text-2xl sm:text-3xl font-bold uppercase mb-4 sm:mb-6 border-b-3 sm:border-b-4 border-black pb-3 sm:pb-4'>
             Tooltips
           </h2>
-          <div className='flex flex-wrap gap-4'>
+          <div className='flex flex-wrap gap-3 sm:gap-4'>
             <Tooltip content='Підказка зверху' position='top'>
               <Button variant='primary'>Top</Button>
             </Tooltip>
@@ -241,8 +904,8 @@ function HomePageContent() {
         </section>
 
         {/* Skeleton Loading */}
-        <section className='bg-white border-4 border-black p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]'>
-          <h2 className='text-3xl font-bold uppercase mb-6 border-b-4 border-black pb-4 flex items-center justify-between'>
+        <section className='bg-white border-3 sm:border-4 border-black p-4 sm:p-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] sm:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]'>
+          <h2 className='text-xl sm:text-2xl md:text-3xl font-bold uppercase mb-4 sm:mb-6 border-b-3 sm:border-b-4 border-black pb-3 sm:pb-4 flex items-center justify-between'>
             Skeleton Loading
             <Button
               onClick={() => {
@@ -274,11 +937,11 @@ function HomePageContent() {
         </section>
 
         {/* Buttons */}
-        <section className='bg-white border-4 border-black p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]'>
-          <h2 className='text-3xl font-bold uppercase mb-6 border-b-4 border-black pb-4'>
+        <section className='bg-white border-3 sm:border-4 border-black p-4 sm:p-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] sm:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]'>
+          <h2 className='text-2xl sm:text-3xl font-bold uppercase mb-4 sm:mb-6 border-b-3 sm:border-b-4 border-black pb-3 sm:pb-4'>
             Buttons with Ripple
           </h2>
-          <div className='flex flex-wrap gap-4'>
+          <div className='flex flex-wrap gap-3 sm:gap-4'>
             <Button variant='primary'>Primary</Button>
             <Button variant='secondary'>Secondary</Button>
             <Button variant='danger'>Danger</Button>
@@ -808,14 +1471,16 @@ function HomePageContent() {
         </section>
 
         {/* Spinner & Rating */}
-        <section className='bg-white border-4 border-black p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]'>
-          <h2 className='text-3xl font-bold uppercase mb-6 border-b-4 border-black pb-4'>
+        <section className='bg-white border-3 sm:border-4 border-black p-4 sm:p-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] sm:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]'>
+          <h2 className='text-2xl sm:text-3xl font-bold uppercase mb-4 sm:mb-6 border-b-3 sm:border-b-4 border-black pb-3 sm:pb-4'>
             Spinner & Rating
           </h2>
-          <div className='space-y-6'>
+          <div className='space-y-4 sm:space-y-6'>
             <div>
-              <h3 className='font-bold mb-4'>Spinners</h3>
-              <div className='flex items-center gap-6'>
+              <h3 className='font-bold mb-3 sm:mb-4 text-base sm:text-lg'>
+                Spinners
+              </h3>
+              <div className='flex items-center gap-4 sm:gap-6'>
                 <Spinner size='sm' />
                 <Spinner size='md' />
                 <Spinner size='lg' />
@@ -825,16 +1490,20 @@ function HomePageContent() {
             <Divider />
 
             <div>
-              <h3 className='font-bold mb-4'>Rating</h3>
+              <h3 className='font-bold mb-3 sm:mb-4 text-base sm:text-lg'>
+                Rating
+              </h3>
               <Rating value={rating} onChange={setRating} size='lg' />
-              <p className='mt-2 font-bold'>Ваш рейтинг: {rating} / 5</p>
+              <p className='mt-2 font-bold text-sm sm:text-base'>
+                Ваш рейтинг: {rating} / 5
+              </p>
             </div>
           </div>
         </section>
 
         {/* File Upload */}
-        <section className='bg-white border-4 border-black p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]'>
-          <h2 className='text-3xl font-bold uppercase mb-6 border-b-4 border-black pb-4'>
+        <section className='bg-white border-3 sm:border-4 border-black p-4 sm:p-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] sm:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]'>
+          <h2 className='text-2xl sm:text-3xl font-bold uppercase mb-4 sm:mb-6 border-b-3 sm:border-b-4 border-black pb-3 sm:pb-4'>
             File Upload
           </h2>
           <FileUpload
@@ -845,28 +1514,151 @@ function HomePageContent() {
             onChange={setFiles}
           />
           {files.length > 0 && (
-            <p className='mt-4 font-bold'>Завантажено файлів: {files.length}</p>
+            <p className='mt-4 font-bold text-sm sm:text-base'>
+              Завантажено файлів: {files.length}
+            </p>
           )}
         </section>
 
+        {/* Timeline/Steps */}
+        <section className='bg-white border-3 sm:border-4 border-black p-4 sm:p-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] sm:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]'>
+          <h2 className='text-2xl sm:text-3xl font-bold uppercase mb-4 sm:mb-6 border-b-3 sm:border-b-4 border-black pb-3 sm:pb-4'>
+            🗓️ Development Timeline
+          </h2>
+          <div className='space-y-4 sm:space-y-6'>
+            <div className='flex gap-3 sm:gap-4 group'>
+              <div className='flex flex-col items-center'>
+                <div className='w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-green-500 border-3 sm:border-4 border-black flex items-center justify-center font-black text-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] group-hover:scale-110 transition-transform'>
+                  ✓
+                </div>
+                <div className='w-1 flex-1 bg-black mt-2 min-h-[40px]'></div>
+              </div>
+              <div className='flex-1 pb-4 sm:pb-6'>
+                <h3 className='text-lg sm:text-xl font-bold mb-1 sm:mb-2'>
+                  Design System Created
+                </h3>
+                <p className='text-xs sm:text-sm text-gray-700 mb-2'>
+                  Створено базовий design system з brutal стилями
+                </p>
+                <Badge variant='success' size='sm'>
+                  Completed
+                </Badge>
+              </div>
+            </div>
+
+            <div className='flex gap-3 sm:gap-4 group'>
+              <div className='flex flex-col items-center'>
+                <div className='w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-blue-500 border-3 sm:border-4 border-black flex items-center justify-center font-black text-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] group-hover:scale-110 transition-transform'>
+                  2
+                </div>
+                <div className='w-1 flex-1 bg-black mt-2 min-h-[40px]'></div>
+              </div>
+              <div className='flex-1 pb-4 sm:pb-6'>
+                <h3 className='text-lg sm:text-xl font-bold mb-1 sm:mb-2'>
+                  39+ Components Built
+                </h3>
+                <p className='text-xs sm:text-sm text-gray-700 mb-2'>
+                  Розроблено всі основні компоненти з повною типізацією
+                </p>
+                <Badge variant='primary' size='sm'>
+                  In Progress
+                </Badge>
+              </div>
+            </div>
+
+            <div className='flex gap-3 sm:gap-4 group'>
+              <div className='flex flex-col items-center'>
+                <div className='w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-purple-500 border-3 sm:border-4 border-black flex items-center justify-center font-black text-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] group-hover:scale-110 transition-transform'>
+                  3
+                </div>
+                <div className='w-1 flex-1 bg-black mt-2 min-h-[40px]'></div>
+              </div>
+              <div className='flex-1 pb-4 sm:pb-6'>
+                <h3 className='text-lg sm:text-xl font-bold mb-1 sm:mb-2'>
+                  Documentation & Examples
+                </h3>
+                <p className='text-xs sm:text-sm text-gray-700 mb-2'>
+                  Створено повну документацію з live examples
+                </p>
+                <Badge variant='info' size='sm'>
+                  Active
+                </Badge>
+              </div>
+            </div>
+
+            <div className='flex gap-3 sm:gap-4 group'>
+              <div className='flex flex-col items-center'>
+                <div className='w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gray-300 border-3 sm:border-4 border-black flex items-center justify-center font-black text-gray-600 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] group-hover:scale-110 transition-transform'>
+                  4
+                </div>
+              </div>
+              <div className='flex-1'>
+                <h3 className='text-lg sm:text-xl font-bold mb-1 sm:mb-2'>
+                  NPM Package Release
+                </h3>
+                <p className='text-xs sm:text-sm text-gray-700 mb-2'>
+                  Публікація пакету на npm для широкого використання
+                </p>
+                <Badge variant='default' size='sm'>
+                  Coming Soon
+                </Badge>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Newsletter/CTA Section */}
+        <section className='bg-gradient-to-br from-yellow-300 via-orange-300 to-pink-300 border-3 sm:border-4 border-black p-6 sm:p-8 md:p-10 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] sm:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] md:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)]'>
+          <div className='text-center max-w-2xl mx-auto'>
+            <h2
+              className='text-3xl sm:text-4xl md:text-5xl font-black uppercase mb-3 sm:mb-4'
+              style={{ textShadow: '3px 3px 0px rgba(0, 0, 0, 1)' }}
+            >
+              🚀 Ready to Build?
+            </h2>
+            <p className='text-base sm:text-lg md:text-xl font-bold mb-6 sm:mb-8'>
+              Почніть створювати брутальні інтерфейси вже сьогодні!
+            </p>
+            <div className='flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center max-w-md mx-auto'>
+              <Input
+                type='email'
+                placeholder='your@email.com'
+                className='flex-1'
+              />
+              <Button variant='primary' size='lg' className='whitespace-nowrap'>
+                Get Started
+              </Button>
+            </div>
+            <p className='text-xs sm:text-sm mt-3 sm:mt-4 font-bold opacity-80'>
+              Підпишіться на оновлення та нові компоненти
+            </p>
+          </div>
+        </section>
+
         {/* Footer */}
-        <footer className='text-center mt-12 pt-8 border-t-4 border-black'>
-          <p className='text-xl font-bold mb-4'>
+        <footer className='text-center mt-8 sm:mt-12 pt-6 sm:pt-8 border-t-3 sm:border-t-4 border-black px-4'>
+          <p className='text-base sm:text-lg md:text-xl font-bold mb-3 sm:mb-4'>
             Made with 💀 by CRM Team · Brutal UI v0.1.0
           </p>
-          <div className='flex justify-center gap-4'>
+          <div className='flex flex-col sm:flex-row justify-center gap-3 sm:gap-4'>
             <a
               href='https://github.com/rollandss/brutal-ui'
-              className='brutal-pressable brutal-ripple px-6 py-3 bg-black text-white border-4 border-black font-bold uppercase text-sm inline-block'
+              className='brutal-pressable brutal-ripple px-5 sm:px-6 py-2.5 sm:py-3 bg-black text-white border-3 sm:border-4 border-black font-bold uppercase text-xs sm:text-sm inline-block hover:translate-y-[-2px] transition-transform'
             >
               GitHub
             </a>
             <a
               href='https://www.npmjs.com/package/@brutal-ui/react'
-              className='brutal-pressable brutal-ripple px-6 py-3 bg-red-500 text-white border-4 border-black font-bold uppercase text-sm inline-block'
+              className='brutal-pressable brutal-ripple px-5 sm:px-6 py-2.5 sm:py-3 bg-red-500 text-white border-3 sm:border-4 border-black font-bold uppercase text-xs sm:text-sm inline-block hover:translate-y-[-2px] transition-transform'
             >
               NPM
             </a>
+            <Link
+              href='/docs'
+              className='brutal-pressable brutal-ripple px-5 sm:px-6 py-2.5 sm:py-3 bg-blue-500 text-white border-3 sm:border-4 border-black font-bold uppercase text-xs sm:text-sm inline-block hover:translate-y-[-2px] transition-transform'
+            >
+              Docs
+            </Link>
           </div>
         </footer>
       </div>

@@ -6,9 +6,11 @@ import { Badge } from '../../../src/components/badge';
 import { Button } from '../../../src/components/button';
 import { CodeBlock } from '../../components/CodeBlock';
 import { ComponentPreview } from '../../components/ComponentPreview';
+import { useToast } from '../../../src/components/toast';
 
 export default function CommandDocs() {
   const [isOpen, setIsOpen] = useState(false);
+  const { addToast } = useToast();
 
   const commands = [
     {
@@ -16,21 +18,23 @@ export default function CommandDocs() {
       label: 'Створити файл',
       keywords: ['new', 'file'],
       icon: '📄',
-      onSelect: () => console.log('Файл створено'),
+      onSelect: () => addToast({ title: 'Файл створено', type: 'success' }),
     },
     {
       id: '2',
       label: 'Відкрити налаштування',
       keywords: ['settings', 'config'],
       icon: '⚙️',
-      onSelect: () => console.log('Налаштування відкрито'),
+      onSelect: () =>
+        addToast({ title: 'Налаштування відкрито', type: 'info' }),
     },
     {
       id: '3',
       label: 'Зберегти документ',
       keywords: ['save', 'document'],
       icon: '💾',
-      onSelect: () => console.log('Документ збережено'),
+      onSelect: () =>
+        addToast({ title: 'Документ збережено', type: 'success' }),
     },
   ];
 

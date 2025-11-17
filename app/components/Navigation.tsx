@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '../../src/utils/cn';
@@ -30,7 +31,9 @@ const navigation = [
       { name: 'Dropdown', href: '/docs/dropdown' },
       { name: 'FileUpload', href: '/docs/file-upload' },
       { name: 'Input', href: '/docs/input' },
+      { name: 'InteractiveCards', href: '/docs/interactive-cards' },
       { name: 'Modal', href: '/docs/modal' },
+      { name: 'Motion', href: '/docs/motion' },
       { name: 'Pagination', href: '/docs/pagination' },
       { name: 'Popover', href: '/docs/popover' },
       { name: 'Progress', href: '/docs/progress' },
@@ -42,64 +45,95 @@ const navigation = [
       { name: 'Slider', href: '/docs/slider' },
       { name: 'Spinner', href: '/docs/spinner' },
       { name: 'Stepper', href: '/docs/stepper' },
+      { name: 'Sticker', href: '/docs/sticker' },
       { name: 'Switch', href: '/docs/switch' },
       { name: 'Table', href: '/docs/table' },
       { name: 'Tabs', href: '/docs/tabs' },
       { name: 'Textarea', href: '/docs/textarea' },
       { name: 'Timeline', href: '/docs/timeline' },
       { name: 'Toast', href: '/docs/toast' },
+      { name: 'Toggle', href: '/docs/toggle' },
       { name: 'Tooltip', href: '/docs/tooltip' },
     ],
   },
 ];
 
-export function Navigation() {
+interface NavigationProps {
+  onItemClick?: () => void;
+}
+
+export function Navigation({ onItemClick }: NavigationProps) {
   const pathname = usePathname();
+  const [openSections, setOpenSections] = useState<string[]>(['Components']);
+
+  const toggleSection = (sectionName: string) => {
+    setOpenSections(prev => 
+      prev.includes(sectionName)
+        ? prev.filter(name => name !== sectionName)
+        : [...prev, sectionName]
+    );
+  };
 
   return (
-    <nav className='w-64 bg-white border-r-4 border-black p-6 h-screen sticky top-0 overflow-y-auto'>
-      <div className='mb-8'>
-        <Link href='/' className='block'>
-          <h1 className='text-3xl font-black uppercase mb-2'>🎨 Brutal UI</h1>
-          <p className='text-sm font-bold text-gray-600'>v0.1.0</p>
+    <nav className='w-full h-screen bg-white border-r-4 border-black p-4 sm:p-6 overflow-y-auto'>
+      <div className='mb-6 lg:mb-8'>
+        <Link href='/' className='block' onClick={onItemClick}>
+          <h1 className='text-2xl sm:text-3xl font-black uppercase mb-2'>🎨 Brutal UI</h1>
+          <p className='text-xs sm:text-sm font-bold text-gray-600'>v0.1.0</p>
         </Link>
       </div>
 
-      <div className='space-y-6'>
+      <div className='space-y-4 sm:space-y-6'>
         {navigation.map((section) => (
           <div key={section.name}>
             {section.href ? (
               <Link
                 href={section.href}
+                onClick={onItemClick}
                 className={cn(
-                  'block px-4 py-2 font-bold uppercase text-sm border-2 border-black transition-all',
+                  'block px-3 sm:px-4 py-2 font-bold uppercase text-xs sm:text-sm border-2 border-black transition-all',
                   pathname === section.href
                     ? 'bg-black text-white'
-                    : 'bg-white hover:bg-gray-100'
+                    : 'bg-white hover:bg-gray-100 active:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]'
                 )}
               >
                 {section.name}
               </Link>
             ) : (
               <>
-                <h2 className='px-4 py-2 font-bold uppercase text-sm text-gray-600 border-b-2 border-black mb-2'>
-                  {section.name}
-                </h2>
-                <div className='space-y-1'>
-                  {section.children?.map((child) => (
-                    <Link
-                      key={child.href}
-                      href={child.href}
-                      className={cn(
-                        'block px-4 py-2 text-sm font-medium transition-all border-l-4',
-                        pathname === child.href
-                          ? 'border-black bg-gray-100 font-bold'
-                          : 'border-transparent hover:border-gray-300 hover:bg-gray-50'
-                      )}
-                    >
-                      {child.name}
-                    </Link>
-                  ))}
+                <button
+                  onClick={() => toggleSection(section.name)}
+                  className='w-full flex items-center justify-between px-3 sm:px-4 py-2 font-bold uppercase text-xs sm:text-sm text-gray-600 border-b-2 border-black mb-2 hover:bg-gray-50 transition-colors'
+                >
+                  <span>{section.name}</span>
+                  <span className={cn(
+                    'transform transition-transform duration-200',
+                    openSections.includes(section.name) ? 'rotate-90' : ''
+                  )}>
+                    ▶
+                  </span>
+                </button>
+                <div className={cn(
+                  'overflow-hidden transition-all duration-200',
+                  openSections.includes(section.name) ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'
+                )}>
+                  <div className='space-y-1 pb-2'>
+                    {section.children?.map((child) => (
+                      <Link
+                        key={child.href}
+                        href={child.href}
+                        onClick={onItemClick}
+                        className={cn(
+                          'block px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium transition-all border-l-4',
+                          pathname === child.href
+                            ? 'border-black bg-gray-100 font-bold'
+                            : 'border-transparent hover:border-gray-300 hover:bg-gray-50 active:bg-gray-100'
+                        )}
+                      >
+                        {child.name}
+                      </Link>
+                    ))}
+                  </div>
                 </div>
               </>
             )}
