@@ -856,7 +856,7 @@ function HomePageContent() {
           </p>
           <div className='flex justify-center gap-4'>
             <a
-              href='https://github.com/yourusername/brutal-ui'
+              href='https://github.com/rollandss/brutal-ui'
               className='brutal-pressable brutal-ripple px-6 py-3 bg-black text-white border-4 border-black font-bold uppercase text-sm inline-block'
             >
               GitHub
